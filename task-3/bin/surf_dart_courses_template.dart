@@ -176,8 +176,9 @@ class Analyzer {
           .toList();
 
   List<AgriculturalMachinery> summaryList(List<AgriculturalMachinery> fistList,
-          List<AgriculturalMachinery> secondList) =>
-      fistList + secondList;
+      List<AgriculturalMachinery> secondList) {
+    return getSortedByAgeUniqueMachine(fistList + secondList);
+  }
 
   void showAverageAge(List<AgriculturalMachinery> allMachine, String message) {
     final averageAge = allMachine.fold(
@@ -191,15 +192,14 @@ class Analyzer {
 
   List<AgriculturalMachinery> getOldestPart(
       List<AgriculturalMachinery> machineList) {
-    final sortedMachineList = getSortedByAgeUniqueMachine(machineList);
-    return machineList.sublist(0, (sortedMachineList.length ~/ 2).round());
+    return machineList.sublist(0, (machineList.length ~/ 2).round());
   }
 
-  SplayTreeSet<AgriculturalMachinery> getSortedByAgeUniqueMachine(
+  List<AgriculturalMachinery> getSortedByAgeUniqueMachine(
       List<AgriculturalMachinery> machineList) {
     final nonRepeatingMachine =
         SplayTreeSet<AgriculturalMachinery>((a, b) => a.id.compareTo(b.id));
     nonRepeatingMachine.addAll(machineList);
-    return nonRepeatingMachine;
+    return nonRepeatingMachine.toList();
   }
 }
