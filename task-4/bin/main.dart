@@ -7,8 +7,10 @@ void main() {
   var woodBookcase = Bookcase('wood', 80, 200, 'IKEA', books: []);
   var metalBookcase = Bookcase('metal', 60, 180, 'Metalworks Ltd.', books: []);
 
-  var mockingBook = PaperBook(
-      'To Kill a Mockingbird', 'Harper Lee', 1960, 281, Condition.good);
+  var warBook =
+      PaperBook('Война и мир', 'Лев Толстой', 1869, 1225, Condition.good);
+  var masterBook = PaperBook('Мастер и Маргарита', 'Михаил Булгаков', 1967, 480, Condition.normal);
+
 
   var book1984 =
       PaperBook('1984', 'George Orwell', 1949, 328, Condition.excellent);
@@ -18,7 +20,7 @@ void main() {
   bookGatsby.readBook();
   bookGatsby.aboutBook();
 
-  woodBookcase.addBooksToBookcase([mockingBook, book1984]);
+  woodBookcase.addBooksToBookcase([warBook, book1984]);
   print(woodBookcase.info());
   print(metalBookcase.info());
 
