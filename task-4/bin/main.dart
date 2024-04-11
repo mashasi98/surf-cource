@@ -4,13 +4,14 @@ import 'entities/paperBook.dart';
 import 'enums/condition.dart';
 
 void main() {
-  var woodBookcase = Bookcase('wood', 80, 200, 'IKEA', books: []);
-  var metalBookcase = Bookcase('metal', 60, 180, 'Metalworks Ltd.', books: []);
+  var woodBookcase = Bookcase('wood', 80, 200, books: []);
+  var metalBookcase =
+      Bookcase.withManufacturer('metal', 60, 180, books: [], 'Metalworks Ltd.');
 
   var warBook =
       PaperBook('Война и мир', 'Лев Толстой', 1869, 1225, Condition.good);
-  var masterBook = PaperBook('Мастер и Маргарита', 'Михаил Булгаков', 1967, 480, Condition.normal);
-
+  var masterBook = PaperBook(
+      'Мастер и Маргарита', 'Михаил Булгаков', 1967, 480, Condition.normal);
 
   var book1984 =
       PaperBook('1984', 'George Orwell', 1949, 328, Condition.excellent);
@@ -20,7 +21,7 @@ void main() {
   bookGatsby.readBook();
   bookGatsby.aboutBook();
 
-  woodBookcase.addBooksToBookcase([warBook, book1984]);
+  woodBookcase.addBooksToBookcase([warBook, book1984, masterBook]);
   print(woodBookcase.info());
   print(metalBookcase.info());
 
@@ -30,4 +31,8 @@ void main() {
   ebook.readBook();
   ebook.aboutBook();
   woodBookcase.addBooksToBookcase(ebook);
+
+  var pushkinEbook = EBook.withoutPublishDate(
+      'Москва', 'Александр Сергеевич Пушкин', 30, 'FB2');
+  pushkinEbook.aboutBook();
 }

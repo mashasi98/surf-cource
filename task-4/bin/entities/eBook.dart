@@ -3,9 +3,9 @@ import '../Interfaces/Ibook.dart' show IBook;
 class EBook extends IBook {
   final String format;
 
-  EBook(super.title, super.author, super.publishDate, super.pageCount,
-      this.format);
-
+  EBook(super.title, super.author, super.publishDate, super.pageCount, this.format) ;
+  EBook.withoutPublishDate(String title, String author, int pageCount, this.format)
+      : super.withoutPublishDate(title, author, pageCount);
   @override
   void aboutBook() {
     super.aboutBook();

@@ -15,11 +15,11 @@ class PaperBook extends IBook {
 
   @override
   void carry() {
-    print('я ношу c собой книгу $title');
+    print('\n я ношу c собой книгу $title');
   }
 
   @override
   void readBook() {
-    print("Читаю обычную  книгу $title ");
+    print("\n Читаю обычную  книгу $title ");
   }
 }

@@ -8,12 +8,17 @@ class Bookcase {
   final List<PaperBook> books;
   static const bool isItPaperBook = true;
 
-  Bookcase(this._material, this._width, this._height, this._manufacturer,
+  Bookcase(this._material, this._width, this._height, {List<PaperBook>? books})
+      : books = books ?? [],
+        _manufacturer = null;
+
+  Bookcase.withManufacturer(
+      this._material, this._width, this._height, this._manufacturer,
       {List<PaperBook>? books})
       : books = books ?? [];
 
   String info() {
-    var info = 'Характеристики шкафа :\n'
+    var info = '\n Характеристики шкафа :\n'
         'Материал: $_material, \n '
         'Параметры шкафа : $_width см на  $_height см,\n '
         'Производитель: ${_manufacturer ?? "нет информации"} \n';
@@ -28,6 +33,6 @@ class Bookcase {
         ? {books.add(booksToAdd)}
         : (booksToAdd is List<PaperBook>)
             ? books.addAll(booksToAdd)
-            : print('Такое в шкаф не поставишь');
+            : print('\n Такое в шкаф не поставишь');
   }
 }
