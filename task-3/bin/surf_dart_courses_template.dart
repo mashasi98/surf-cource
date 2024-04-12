@@ -8,10 +8,10 @@ class Territory {
   final List<AgriculturalMachinery> machineries;
 
   Territory(
-      this.areaInHectare,
-      this.crops,
-      this.machineries,
-      );
+    this.areaInHectare,
+    this.crops,
+    this.machineries,
+  );
 }
 
 class AgriculturalMachinery {
@@ -19,15 +19,19 @@ class AgriculturalMachinery {
   final DateTime releaseDate;
 
   AgriculturalMachinery(
-      this.id,
-      this.releaseDate,
-      );
+    this.id,
+    this.releaseDate,
+  );
 
   /// Переопределяем оператор "==", чтобы сравнивать объекты по значению.
   @override
   bool operator ==(Object? other) {
-    return identical(this, other) || (other is AgriculturalMachinery && other.id == id && other.releaseDate == releaseDate);
+    return identical(this, other) ||
+        (other is AgriculturalMachinery &&
+            other.id == id &&
+            other.releaseDate == releaseDate);
   }
+
   @override
   int get hashCode => Object.hashAll([id, releaseDate]);
 }
@@ -151,51 +155,51 @@ final mapAfter2010 = {
 };
 
 void main() {
+  Analyzer analyzer = Analyzer();
   final List<AgriculturalMachinery> machineListBefore2010 =
-  Analyzer().getList(mapBefore2010);
+      analyzer.getList(mapBefore2010);
   final List<AgriculturalMachinery> machineListAfter2010 =
-  Analyzer().getList(mapAfter2010);
+      analyzer.getList(mapAfter2010);
   final List<AgriculturalMachinery> allMachine =
-  Analyzer().summaryList(machineListBefore2010, machineListAfter2010);
-  Analyzer().showAverageAge(allMachine, 'Средний возраст всей техники');
-  Analyzer().showAverageAge(Analyzer().getOldestPart(allMachine),
+      analyzer.summaryList(machineListBefore2010, machineListAfter2010);
+  analyzer.showAverageAge(allMachine, 'Средний возраст всей техники');
+  analyzer.showAverageAge(Analyzer().getOldestPart(allMachine),
       'Средний возраст самой старой техники');
 }
 
 class Analyzer {
-  List<AgriculturalMachinery> getList(Map<Countries, List<Territory>> map) {
-    return map.values
-        .expand((allTerritory) => allTerritory
-        .map((currentTerritory) => currentTerritory.machineries))
-        .expand((machines) => machines.toList())
-        .toList();
-  }
+  List<AgriculturalMachinery> getList(Map<Countries, List<Territory>> map) =>
+      map.values
+          .expand((allTerritory) => allTerritory
+              .map((currentTerritory) => currentTerritory.machineries))
+          .expand((machines) => machines.toList())
+          .toList();
 
   List<AgriculturalMachinery> summaryList(List<AgriculturalMachinery> fistList,
       List<AgriculturalMachinery> secondList) {
-    return fistList + secondList;
+    return getSortedByAgeUniqueMachine(fistList + secondList);
   }
 
   void showAverageAge(List<AgriculturalMachinery> allMachine, String message) {
-    final averageAge = allMachine
-        .map((machine) =>
-        (DateTime.now().year - machine.releaseDate.year).toInt())
-        .reduce((value, element) => value + element) /
+    final averageAge = allMachine.fold(
+            0,
+            (previousValue, element) =>
+                previousValue +
+                (DateTime.now().year - element.releaseDate.year)) /
         allMachine.length;
     print('$message - ${averageAge.round()}.');
   }
 
   List<AgriculturalMachinery> getOldestPart(
       List<AgriculturalMachinery> machineList) {
-    final sortedMachineList = getSortedByAgeUniqueMachine(machineList);
-    return machineList.sublist(0, (sortedMachineList.length ~/ 2).round());
+    return machineList.sublist(0, (machineList.length ~/ 2).round());
   }
 
-  SplayTreeSet<AgriculturalMachinery> getSortedByAgeUniqueMachine(
+  List<AgriculturalMachinery> getSortedByAgeUniqueMachine(
       List<AgriculturalMachinery> machineList) {
     final nonRepeatingMachine =
-    SplayTreeSet<AgriculturalMachinery>((a, b) => a.id.compareTo(b.id));
+        SplayTreeSet<AgriculturalMachinery>((a, b) => a.id.compareTo(b.id));
     nonRepeatingMachine.addAll(machineList);
-    return nonRepeatingMachine;
+    return nonRepeatingMachine.toList();
   }
 }
