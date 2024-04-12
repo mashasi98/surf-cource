@@ -1,3 +1,4 @@
 int calculate() {
-  return 6 * 7;
+  // some changes here
+  return 6 * 7+1;
 }
