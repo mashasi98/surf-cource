@@ -1,5 +1,6 @@
 import 'filter.dart';
 import 'product.dart';
+import 'utils.dart';
 
 class Price_filter implements Filter<double> {
   double _reduce_price;
@@ -13,11 +14,9 @@ class Price_filter implements Filter<double> {
 
   static less_then_or_equals_reduce(
       List<Product> items, Filter<double> filter) {
-    for (var item in items) {
-      if (filter.apply(item.price)) {
-        print(item.toString());
-      }
-    }
+    items
+        .where((item) => filter.apply(item.price))
+        .forEach((item) => print(item.toString()));
     print('__________________');
   }
 }

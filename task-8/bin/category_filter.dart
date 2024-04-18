@@ -12,11 +12,9 @@ class Category_filter implements Filter<String> {
   }
 
   static applyFilter(List<Product> items, Filter<String> filter) {
-    for (var item in items) {
-      if (filter.apply(item.category)) {
-        print(item.toString());
-      }
-    }
+    items
+        .where((element) => filter.apply(element.category))
+        .forEach((element) => print(element.toString()));
     print('__________________');
   }
 }

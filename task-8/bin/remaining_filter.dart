@@ -12,11 +12,9 @@ class Remaining_filter implements Filter<int> {
   }
 
   static less_then_reduce(List<Product> items, Filter<int> filter) {
-    for (var item in items) {
-      if (filter.apply(item.amount)) {
-        print(item.toString());
-      }
-    }
+    items
+        .where((item) => filter.apply((item.amount)))
+        .forEach((item) => print(item.toString()));
     print('__________________');
   }
 }
