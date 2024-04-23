@@ -12,9 +12,9 @@ void main() {
 5,вода,Апельсин,25,100
 6,вода,Бородинский,500,5''';
   var utils = Utils();
-  var articlesList = utils.string_to_list(articles);
+  var articlesList = utils.stringToList(articles);
 
-  Category_filter.applyFilter(articlesList, Category_filter("хлеб"));
-  Price_filter.less_then_or_equals_reduce(articlesList, Price_filter(300.0));
-  Remaining_filter.less_then_reduce(articlesList, Remaining_filter(15));
+  Categoryfilter.applyFilter(articlesList, Categoryfilter("хлеб"));
+  PriceFilter.lessThenOrEqualsReduce(articlesList, PriceFilter(300.0));
+  RemainingFilter.lessThenReduce(articlesList, RemainingFilter(15));
 }

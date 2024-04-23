@@ -1,9 +1,9 @@
 class Product {
-  int _itemId;
-  String _category;
-  String _title;
-  double _price;
-  int _amount;
+ final int _itemId;
+ final String _category;
+ final String _title;
+ final double _price;
+ final int _amount;
 
   Product(this._itemId, this._category, this._title, this._price, this._amount);
 

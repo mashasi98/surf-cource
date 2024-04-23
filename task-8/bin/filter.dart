@@ -1,3 +1,3 @@
-abstract class Filter<T> {
+abstract interface class Filter<T> {
   bool apply(T item);
 }

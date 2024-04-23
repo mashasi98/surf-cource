@@ -1,17 +1,17 @@
 import 'filter.dart';
 import 'product.dart';
 
-class Category_filter implements Filter<String> {
-  String _required_category;
+class Categoryfilter implements Filter<String> {
+  String _requiredCategory;
 
-  Category_filter(this._required_category);
+  Categoryfilter(this._requiredCategory);
 
   @override
   bool apply(category) {
-    return category == _required_category;
+    return category == _requiredCategory;
   }
 
-  static applyFilter(List<Product> items, Filter<String> filter) {
+  static void applyFilter(List<Product> items, Filter<String> filter) {
     items
         .where((element) => filter.apply(element.category))
         .forEach((element) => print(element.toString()));
