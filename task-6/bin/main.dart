@@ -1,30 +1,26 @@
-class PokerPlayer {
-  /// Список текущих карт в руке у игрока
-  List<String> _currentHand = ['King of clubs', 'Nine of hearts'];
+typedef Strategy = double Function(
+    List<String> cardOnDesk, List<String> _currentHand);
 
-  /// Субъективная оценка выигрыша
+class PokerPlayer {
+  List<String> _currentHand = ['King of clubs', 'Nine of hearts'];
   double _surenessInWin = 0;
 
-  /// Вычислить шансы на выигрыш
   void calculateProbabilities(
-      List<String> cardOnDesk,
+    List<String> cardOnDesk,
+    Strategy strategy,
+  ) {
+    _surenessInWin = strategy(cardOnDesk, _currentHand);
 
-      /// Это часть первого задания. [Strategy] пока не сущестивует.
-      ///
-      /// Опишите его.
-      Strategy strategy,
-      ) =>
-      _surenessInWin = strategy(cardOnDesk, _currentHand);
+    print('Карты противника: $_currentHand');
+    print('Шанс на победу: $_surenessInWin');
+  }
 }
 
 void main() {
   final opponent = PokerPlayer();
 
-  /// Это часть первого задания. [Strategy] пока не сущестивует.
-  ///
-  /// Опишите его.
   final Strategy fakeStrategy = (p0, p1) {
-    /// Ваш код - здесь
+    return (p0.length + p1.length).toDouble();
   };
 
   opponent.calculateProbabilities(
