@@ -1,3 +1,5 @@
+import 'dart:math';
+
 typedef Strategy = double Function(
     List<String> cardOnDesk, List<String> _currentHand);
 
@@ -10,9 +12,6 @@ class PokerPlayer {
     Strategy strategy,
   ) {
     _surenessInWin = strategy(cardOnDesk, _currentHand);
-
-    print('Карты противника: $_currentHand');
-    print('Шанс на победу: $_surenessInWin');
   }
 }
 
@@ -20,7 +19,10 @@ void main() {
   final opponent = PokerPlayer();
 
   final Strategy fakeStrategy = (p0, p1) {
-    return (p0.length + p1.length).toDouble();
+    print('Карты противника: $p1');
+    var chance = Random().nextInt(100) / 100.0;
+    print('Шанс на победу: $chance');
+    return chance;
   };
 
   opponent.calculateProbabilities(
